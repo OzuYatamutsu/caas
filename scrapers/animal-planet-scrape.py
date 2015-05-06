@@ -6,6 +6,7 @@ err_text = "Sorry"
 base_uri = "http://www.animalplanet.com/pets/cat-facts/?fact_id="
 source = "Animal Planet"
 info_tag = "<info> "
+warn_tag = "<warn> "
 err_tag = "<error> "
 succ_tag = "<success> "
 
@@ -29,9 +30,9 @@ def main():
 				cat_fact = scrape(base_uri, id)
 				success = True
 			except Exception:
-				print(err_tag + "Connection failure! Trying again for ID " + str(id))
+				print(warn_tag + "Connection failure! Trying again for ID " + str(id))
 				retries = retries - 1
-
+		if (retries == 0): print(err_tag + "Giving up on ID " + str(id))
 		if (cat_fact is not False):
 			print(succ_tag + "Adding ID " + str(id) + " to set: " + cat_fact)
 			catfact_set.append(catfact_process(cat_fact))

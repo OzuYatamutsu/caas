@@ -13,6 +13,7 @@ driver = webdriver.PhantomJS()
 max_id = 49999
 output_catfact_fname = "catfact_animal-planet.json"
 output_metadata_fname = "metadata_animal-planet.json"
+err_retry_count = 3
 
 def main():
 	catfact_set = []
@@ -20,12 +21,17 @@ def main():
 
 	for id in range(47000, max_id):
 		cat_fact = False
+		success = False
+		retries = err_retry_count
+	
+		while not success and retries > 0:
+			try:
+				cat_fact = scrape(base_uri, id)
+				success = True
+			except Exception:
+				print(err_tag + "Connection failure! Trying again for ID " + str(id))
+				retries = retries - 1
 
-		try:
-			cat_fact = scrape(base_uri, id)
-		except Exception:
-			 print(err_tag + "Connection failure! Skipping ID " + str(id))
-		
 		if (cat_fact is not False):
 			print(succ_tag + "Adding ID " + str(id) + " to set: " + cat_fact)
 			catfact_set.append(catfact_process(cat_fact))

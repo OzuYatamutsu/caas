@@ -11,8 +11,8 @@ succ_tag = "<success> "
 
 driver = webdriver.PhantomJS()
 max_id = 49999
-output_catfact_fname = "catfact.json"
-output_metadata_fname = "metadata.json"
+output_catfact_fname = "catfact_animal-planet.json"
+output_metadata_fname = "metadata_animal-planet.json"
 
 def main():
 	catfact_set = []
@@ -66,3 +66,6 @@ def metadata_process(uri, id):
 def output_json(fname, set):
 	with open(fname, 'w') as f:
 		f.write(dumps(set))
+
+# Run on call
+main()

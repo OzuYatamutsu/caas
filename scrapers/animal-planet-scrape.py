@@ -18,7 +18,7 @@ def main():
 	catfact_set = []
 	metadata_set = []
 
-	for id in range(45000, max_id):
+	for id in range(47000, max_id):
 		cat_fact = False
 
 		try:
@@ -27,8 +27,9 @@ def main():
 			 print(err_tag + "Connection failure! Skipping ID " + str(id))
 		
 		if (cat_fact is not False):
-			catfact_set.append(catfact_process(catfact))
-			metadata_set.append(metadata_process(uri, id))
+			print(succ_tag + "Adding ID " + str(id) + " to set: " + cat_fact)
+			catfact_set.append(catfact_process(cat_fact))
+			metadata_set.append(metadata_process(cat_fact, base_uri, id))
 	output_json(output_catfact_fname, catfact_set)
 	output_json(output_metadata_fname, metadata_set)
 	print(info_tag + "Processing complete!")
@@ -41,23 +42,23 @@ def scrape(uri, id):
 	driver.get(base_uri + str(id))
 
 	# Check if usable result
-	if ((err_text not in driver.title) and (driver.title.replace(" ", "") != "")):
-		driver.find_elements_by_class_name("global-body-text")[0].text
+	if ((err_text not in driver.title) and (driver.title.split("|").replace(" ", "") != "")):
+		return driver.find_elements_by_class_name("global-body-text")[0].text
 	else:
 		return False
 
-def catfact_process(catfact):
+def catfact_process(cat_fact):
 	json_obj = {}
-	json_obj["_id"] = md5(catfact.encode("utf-8")).hexdigest()
-	json_obj["text"] = catfact
+	json_obj["_id"] = md5(cat_fact.encode("utf-8")).hexdigest()
+	json_obj["text"] = cat_fact
 	
 	return json_obj
 
-def metadata_process(uri, id):
+def metadata_process(cat_fact, uri, id):
 	global source
 
 	json_obj = {}
-	json_obj["_id"] = md5(catfact.encode("utf-8")).hexdigest()
+	json_obj["_id"] = md5(cat_fact.encode("utf-8")).hexdigest()
 	json_obj["source"] = source
 	json_obj["url"] = uri + str(id)
 

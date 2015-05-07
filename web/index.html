@@ -41,13 +41,13 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">Cat-fact</a>
+                        <a href="#fact">Cat-fact</a>
                     </li>
                     <li>
-                        <a href="#">API</a>
+                        <a href="#api">API</a>
                     </li>
                     <li>
-                        <a href="#">Source</a>
+                        <a href="#source">Source</a>
                     </li>
                 </ul>
             </div>
@@ -59,18 +59,18 @@
     <!-- Full Width Image Header with Logo -->
     <!-- Image backgrounds are set within the full-width-pics.css file. -->
     <header class="image-bg-fluid-height">
-        <img class="img-responsive img-center" src="http://placehold.it/200x200&text=Logo" alt="">
+        <img class="img-responsive img-center" src="circle-cat.png" alt="">
     </header>
 
-    <!-- Content Section -->
-    <section>
+    <!-- Cat-fact Section -->
+    <section><a name="fact"></a>
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="section-heading">Cat-facts as a Service!</h1>
                     
-                    <p class="section-paragraph">{{ catfact.text }}</p>
-					<p class="lead section-lead">Source: <a href="{{ meta.url }}">{{ meta.source }}</a></p>
+					<p class="lead section-lead">{{ catfact.text }}</p>
+                    <p class="section-paragraph">Source: <a href="{{ meta.url }}">{{ meta.source }}</a></p>
                 </div>
             </div>
         </div>
@@ -80,8 +80,8 @@
     <!-- Image backgrounds are set within the full-width-pics.css file. -->
     <aside class="image-bg-fixed-height"></aside>
 
-    <!-- Content Section -->
-    <section>
+    <!-- API Section -->
+    <section><a name="api"></a>
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -177,27 +177,28 @@
 							<td>Returns a specific cat-fact by <code>id</code>.</td>
 						</tr>
 					</table>
-                    <p class="lead section-lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                    
                 </div>
             </div>
             <!-- /.row -->
         </div>
         <!-- /.container -->
     </section>
-
-    <!-- Footer -->
-    <footer>
+	
+	<!-- Source Section -->
+	<section><a name="source"></a>
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
+                    <h1 class="section-heading">Source</h1>
+					<p class="section-paragraph"><b>Steakscorp CaaS</b> is hosted on GitHub <a href="https://github.com/OzuYatamutsu/caas">here</a>. This project is inspired by Tom Dionysus' FOAAS project, which is also hosted on GitHub <a href="https://github.com/tomdionysus/foaas">here</a>.</p>
+					
+					<p class="section-paragraph">This web service is powered by Django, with a MongoDB + Python back-end.</p>
                 </div>
             </div>
             <!-- /.row -->
         </div>
         <!-- /.container -->
-    </footer>
+    </section>
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>

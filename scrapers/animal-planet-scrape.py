@@ -20,7 +20,7 @@ def main():
 	catfact_set = []
 	metadata_set = []
 
-	for id in range(47100, max_id):
+	for id in range(47000, max_id):
 		cat_fact = False
 		success = False
 		retries = err_retry_count

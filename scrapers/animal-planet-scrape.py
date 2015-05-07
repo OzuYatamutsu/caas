@@ -20,7 +20,7 @@ def main():
 	catfact_set = []
 	metadata_set = []
 
-	for id in range(47000, max_id):
+	for id in range(47100, max_id):
 		cat_fact = False
 		success = False
 		retries = err_retry_count
@@ -44,12 +44,14 @@ def main():
 	print(info_tag + "Metadata output to: " + output_metadata_fname)
 
 def scrape(uri, id):
+	global driver
+
 	# GET on URI + ID
 	print(info_tag + "Processing ID " + str(id) + "...")
 	driver.get(base_uri + str(id))
 
 	# Check if usable result
-	if ((err_text not in driver.title) and (driver.title.split("|").replace(" ", "") != "")):
+	if ((err_text not in driver.title) and (driver.title.split("|")[0].replace(" ", "") != "")):
 		return driver.find_elements_by_class_name("global-body-text")[0].text
 	else:
 		return False

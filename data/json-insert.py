@@ -15,12 +15,13 @@ def main():
             auth_set = decode_json(argv[1])
             data_set = decode_json(argv[2])
             auth_conn = connect_db(auth_set)
-        bulk_insert(auth_conn, auth_set, data_set)
+            bulk_insert(auth_conn, auth_set, data_set)
+            print("Job done!")
         except ValueError:
             print(ERR_JSON_MAL)
-    except errors.ServerSelectionTimeoutError:
+        except errors.ServerSelectionTimeoutError:
             print(ERR_MONGO_CONN)
-    except errors.OperationFailure:
+        except errors.OperationFailure:
             print(ERR_MONGO_AUTH)   
     else: print(ERR_ARGS)
 
@@ -32,12 +33,29 @@ def decode_json(fname):
 
 def connect_db(auth_set):
     conn = MongoClient(
-        auth_set["hostname"], 
-        auth_set["port"])
+        auth_set["host"], 
+        int(auth_set["port"]))
     conn[auth_set["auth_db"]].authenticate(
         auth_set["username"],
         auth_set["password"])
     return conn
 
 def bulk_insert(auth_conn, auth_set, data_set):
-    pass
+    coll_target = ""
+    if "text" in data_set[0]:
+        coll_target = "catfact"
+    elif "source" in data_set[0]:
+        coll_target = "meta"
+    else:
+        raise ValueError
+    print("DEBUG: " + coll_target) 
+    for doc in data_set:
+        print("Inserting doc into " + coll_target + ": " + str(doc))
+        try:
+            auth_conn[auth_set["db"]][coll_target].insert(doc)
+        except errors.DuplicateKeyError:
+            print("Duplicate key on " + doc["_id"] + ", attempting update instead")
+            auth_conn[auth_set["db"]][coll_target].update({"_id": doc["_id"]}, doc)
+
+# Run on start
+main()

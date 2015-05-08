@@ -2,19 +2,22 @@
 **Cat-facts as a Service!** This project provides a RESTful API to query a MongoDB database for cat-facts scraped across the web.
 
 ### Dependencies
-**CaaS** is written in **Python 3**, **Django**, and assumes a **MongoDB** backend. As such, it depends on the following:
+**CaaS** is written in **Python 2**, **Django**, and assumes a **MongoDB** backend. As such, it depends on the following:
  * `django`
- * `mongoengine` version **0.9.0**.
+ * `pymongo`
+ * `django-nonrel`
+ * `djangotoolbox`
+ * `mongodb-engine`
 
 ##### Scrapers
  * `phantomjs`
  * `selenium`
 
 Install them all at once:
-`pip3 install django mongoengine==0.9.0 phantomjs selenium`
+`pip install django pymongo git+https://github.com/django-nonrel/django@nonrel-1.5 git+https://github.com/django-nonrel/djangotoolbox git+https://github.com/django-nonrel/mongodb-engine phantomjs selenium`
 
 ### Scrapers
-Scrapers are used to scrape specific sources for cat-facts and output JSON files, ready to be inserted into the database. They are written in **Python 3** and can be found in the `scrapers/` directory.
+Scrapers are used to scrape specific sources for cat-facts and output JSON files, ready to be inserted into the database. They are written in **Python 2** (but compatible with Python 3) and can be found in the `scrapers/` directory.
 
 ### MongoDB collection schema
 The database has two tables: **catfact** and **meta**.

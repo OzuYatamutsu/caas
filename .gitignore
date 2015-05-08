@@ -1,2 +1,3 @@
 data/db-auth.json
+django/db-auth.json
 scrapers/ghostdriver.log

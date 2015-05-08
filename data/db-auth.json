@@ -1,8 +1,0 @@
-{
-        "host": "localhost",
-        "port": "27017",
-        "db": "caas",
-        "auth_db": "caas",
-        "username": "YOUR_USERNAME_HERE",
-        "password": "YOUR_PASSWORD_HERE"
-}

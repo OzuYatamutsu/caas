@@ -3,6 +3,7 @@
 
 ### Dependencies
 **CaaS** is written in **Python 2**, **Django**, and assumes a **MongoDB** backend. It depends on the following:
+ * `virtualenv`
  * `django` version **1.5**
  * `pymongo` version **3.0.0**.
  * `django-nonrel`
@@ -12,6 +13,9 @@
 ##### Scrapers
  * `phantomjs`
  * `selenium`
+
+Switch to the virtual environment packaged in the app:
+`source caas_virtualenv/bin/activate`
 
 Install them all at once:
 `pip install pymongo==3.0.0 git+https://github.com/django-nonrel/django@nonrel-1.5 git+https://github.com/django-nonrel/djangotoolbox git+https://github.com/django-nonrel/mongodb-engine phantomjs selenium`

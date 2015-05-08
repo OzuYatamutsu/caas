@@ -1,4 +1,6 @@
 from json import loads
+from sys import argv
+import os
 
 # Django settings for caas project.
 
@@ -14,7 +16,7 @@ MANAGERS = ADMINS
 # Read from auth file
 db_auth = {}
 
-with open("db-auth.json", "r") as f:
+with open(os.path.abspath(os.path.join(argv[0], os.pardir, "db-auth.json")), "r") as f:
     db_auth = loads(f.read())
 
 DATABASES = {
@@ -129,7 +131,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_mongodb_engine',
-    'djangotoolbox'
+    'djangotoolbox',
+    'caas_app'
    # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:

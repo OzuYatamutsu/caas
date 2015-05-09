@@ -6,5 +6,6 @@ from caas_app import views
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', views.index, name='index')
+    url(r'^$', views.index, name='index'),
+    url(r'^api/$', views.api, name='api')
 )

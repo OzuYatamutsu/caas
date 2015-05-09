@@ -6,13 +6,9 @@ See `index.html` in the `web/` directory.
 
 ### Dependencies
 **CaaS** is written in **Python 2**, **Django**, and assumes a **MongoDB** backend. It depends on the following:
- * `virtualenv`
- * `django` version **1.5**.
- * `pymongo` version **3.0.0**.
- * `django-nonrel`
- * `djangotoolbox`
- * `mongodb-engine`
-
+ * `django`
+ * `pymongo` version **2.8**.
+ * `mongoengine` version **0.9.0**.
 ##### Scrapers
  * `phantomjs`
  * `selenium`
@@ -21,10 +17,9 @@ Switch to the virtual environment packaged in the app:<br />
 `source caas_virtualenv/bin/activate`
 
 Install them all at once:<br />
-`pip install pymongo==3.0.0 git+https://github.com/django-nonrel/django@nonrel-1.5 git+https://github.com/django-nonrel/djangotoolbox git+https://github.com/django-nonrel/mongodb-engine phantomjs selenium`
+`pip install pymongo==2.8 mongoengine==0.9.0 django phantomjs selenium`
 
 ### Setup
- * **Very recommended!** Switch to the virtual environment packaged here, or create your own and install any missing dependencies.
  * Install MongoDB (if not done already) and add a new `caas` database from the MongoDB shell: `use caas`
  * Copy `django/db-auth.template.json` to `django/db-auth.json`, and edit the `username`, `password`, and any other required fields to match your database settings. Do the same in the `data/` directory.
  * Run `data/db-insert.py` against `data/db-auth.json` and all `.json` files in the `data/` directory to populate your database.

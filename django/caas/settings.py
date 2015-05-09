@@ -1,5 +1,6 @@
 from json import loads
 from sys import argv
+import mongoengine
 import os
 
 # Django settings for caas project.
@@ -21,15 +22,27 @@ with open(os.path.abspath(os.path.join(argv[0], os.pardir, "db-auth.json")), "r"
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django_mongodb_engine', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': db_auth['db'],                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': db_auth['username'],
-        'PASSWORD': db_auth['password'],
-        'HOST': db_auth['host'],                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': db_auth['port']                      # Set to empty string for default.
+        'ENGINE': 'django.db.backends.dummy' # Forget your engines! We do it live!
     }
 }
+
+# We're doing this instead!
+_MONGODB_USER = db_auth['username']
+_MONGODB_PASSWD = db_auth['password']
+_MONGODB_HOST = db_auth['host']
+_MONGODB_PORT = db_auth['port']
+_MONGODB_DB = db_auth['db']
+_MONGODB_AUTHDB = db_auth['auth_db']
+_MONGODB_DATABASE_HOST = 'mongodb://' + _MONGODB_USER + ":" + \
+	_MONGODB_PASSWD + "@" + _MONGODB_HOST + ":" + _MONGODB_PORT + \
+	"/" + _MONGODB_AUTHDB
+
+mongoengine.connect(_MONGODB_DB, host=_MONGODB_DATABASE_HOST)
+
+AUTHENTICATION_BACKENDS = (
+    'mongoengine.django.auth.MongoEngineBackend',
+)
+
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -45,7 +58,7 @@ TIME_ZONE = 'America/New_York'
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
 
-SITE_ID = u'1'
+SITE_ID = u'554d5cfabc12c218ab2fa29d'
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -130,8 +143,7 @@ INSTALLED_APPS = (
     #'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_mongodb_engine',
-    'djangotoolbox',
+    'mongoengine.django.mongo_auth',
     'caas_app'
    # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
@@ -139,7 +151,12 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 )
 
-SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
+AUTH_USER_MODEL = 'mongo_auth.MongoUser'
+
+#SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
+SESSION_ENGINE = 'mongoengine.django.sessions'
+SESSION_SERIALIZER = 'mongoengine.django.sessions.BSONSerializer'
+
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

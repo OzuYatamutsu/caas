@@ -14,9 +14,6 @@ See `index.html` in the `django/caas_app/templates/` directory.
  * `phantomjs`
  * `selenium`
 
-Switch to the virtual environment packaged in the app:<br />
-`source caas_virtualenv/bin/activate`
-
 Install them all at once:<br />
 `pip install pymongo==2.8 mongoengine==0.9.0 django phantomjs selenium`
 

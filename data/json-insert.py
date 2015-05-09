@@ -43,9 +43,9 @@ def connect_db(auth_set):
 def bulk_insert(auth_conn, auth_set, data_set):
     coll_target = ""
     if "text" in data_set[0]:
-        coll_target = "caas_app_catfact"
+        coll_target = "catfact"
     elif "source" in data_set[0]:
-        coll_target = "caas_app_meta"
+        coll_target = "meta"
     else:
         raise ValueError
     print("DEBUG: " + coll_target) 

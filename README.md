@@ -35,13 +35,13 @@ The database has two collections: **caas_app_catfact** and **caas_app_meta**.
 This table contains the actual text of the cat-fact.
 
 ##### Fields
-`_id` The MD5 hash of the cat-fact text. <br>
+`_id` The MD5 hash of the cat-fact text, truncated to 24 characters.<br>
 `text` The text cat-fact.
 
 #### `db.caas_app_meta`
 This table contains the metadata of the cat-fact.
 
 ##### Fields
-`_id` The MD5 hash of the cat-fact text. <br>
+`_id` The MD5 hash of the cat-fact text, truncated to 24 characters.<br>
 `source` The human-readable source of the cat-fact. (e.g. "Steakscorp Labs") <br>
 `url` The specific URL where the cat-fact text was scraped.

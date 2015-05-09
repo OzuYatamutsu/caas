@@ -1,11 +1,16 @@
-from django.http import HttpResponse
-from django.template import RequestContext, loader
+from django.shortcuts import render
 from caas_app.models import Catfact, Meta
-from rand import randrange
-import mongoengine
-
-user = authenticate(username=username, password=password)
-assert isinstance(user, mongoengine.django.auth.User)
+from random import randrange
 
 def index(request):
-	pass
+    # Select random fact
+    rand_id = str(Meta.objects[randrange(0, Meta.objects.count())].id)
+    
+    # Pull data from db
+    cat_fact = Catfact.objects().get(_id=rand_id)
+    meta = Meta.objects().get(_id=rand_id)
+
+    # Push to template
+    context = {'cat_fact': cat_fact, 'meta': meta}
+
+    return render(request, "index.html", context)

@@ -29,16 +29,16 @@ Install them all at once:<br />
 Scrapers are used to scrape specific sources for cat-facts and output JSON files, ready to be inserted into the database. They are written in **Python 2** (but compatible with Python 3) and can be found in the `scrapers/` directory.
 
 ### MongoDB collection schema
-The database has two collections: **caas_app_catfact** and **caas_app_meta**.
+The database has two collections: **catfact** and **meta**.
 
-#### `db.caas_app_catfact`
+#### `db.catfact`
 This table contains the actual text of the cat-fact.
 
 ##### Fields
 `_id` The MD5 hash of the cat-fact text, truncated to 24 characters.<br>
 `text` The text cat-fact.
 
-#### `db.caas_app_meta`
+#### `db.meta`
 This table contains the metadata of the cat-fact.
 
 ##### Fields

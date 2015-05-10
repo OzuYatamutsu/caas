@@ -28,10 +28,15 @@ def api(request):
         if ("include" in request.GET):
             include_params = [x.replace("+", " ").replace("%20", " ") for x in request.GET['include'].split(',')] 
             filter_results = Meta.objects(source__in=include_params) 
+            if (filter_results.count() == 0):
+                return HttpResponse("No results from source " + str(include_params) + "!")
             id = str(filter_results[randrange(0, filter_results.count())].id)
         elif ("exclude" in request.GET):
             exclude_params = [x.replace("+", " ").replace("%20", " ") for x in request.GET['exclude'].split(',')]
             filter_results = Meta.objects(source__nin=exclude_params)
+            if (filter_results.count() == 0):
+                return HttpResponse("No results from sources other than " + str(include_params) + "!")
+
             id = str(filter_results[randrange(0, filter_results.count())].id)
         else:
             # No filters

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from mongoengine import queryset
-from caas_app.models import Catfact, Meta
+from caas_app.models import Catfact, Meta, Intro, Newsub, Unsub, Notrecog
 from random import randrange
 
 def index(request):
@@ -50,13 +50,17 @@ def api(request):
     
     # Now parse other arguments here
     if ("intro" in request.GET):
-        pass
+        if (request.GET['intro'] == "yes"):
+            cat_fact.text = Intro.objects[randrange(0, Intro.objects.count())].text + " " + cat_fact.text
     if ("newsub" in request.GET):
-        pass
+        if (request.GET['newsub'] == "yes"):
+            cat_fact.text = Newsub.objects[randrange(0, Newsub.objects.count())].text + " " + cat_fact.text
     if ("unsub" in request.GET):
-        pass
+        if (request.GET['unsub'] == "yes"):
+            cat_fact.text = cat_fact.text + " " + Unsub.objects[randrange(0, Unsub.objects.count())].text
     if ("notrecog" in request.GET):
-        pass
+        if (request.GET['notrecog'] == "yes"):
+            cat_fact.text = Notrecog.objects[randrange(0, Notrecog.objects.count())].text + " " + cat_fact.text
 
     # Now construct JSON response here
     response_json['_id'] = id

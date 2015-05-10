@@ -1,4 +1,4 @@
-data/db-auth.json
-django/db-auth.json
+data/db_auth.json
+django/db_auth.json
 scrapers/ghostdriver.log
 *.pyc

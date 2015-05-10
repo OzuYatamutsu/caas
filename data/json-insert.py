@@ -12,10 +12,10 @@ ERR_MONGO_AUTH = "Error! Credentials were rejected!"
 def main():
     if (len(argv) == 3 and path.isfile(argv[1])):
         try:
-            auth_set = decode_json(argv[1])
-            data_set = decode_json(argv[2])
+            auth_set = decode_json(argv[1])[0]
+            data_set, type = decode_json(argv[2])
             auth_conn = connect_db(auth_set)
-            bulk_insert(auth_conn, auth_set, data_set)
+            bulk_insert(auth_conn, auth_set, data_set, type)
             print("Job done!")
         except ValueError:
             print(ERR_JSON_MAL)
@@ -27,9 +27,10 @@ def main():
 
 def decode_json(fname):
     json_dict = {}
+    type = fname.split("_")[0]
     with open(fname, "r") as f:
         json_dict = loads(f.read())
-    return json_dict
+    return json_dict, type
 
 def connect_db(auth_set):
     conn = MongoClient(
@@ -40,12 +41,20 @@ def connect_db(auth_set):
         auth_set["password"])
     return conn
 
-def bulk_insert(auth_conn, auth_set, data_set):
+def bulk_insert(auth_conn, auth_set, data_set, type):
     coll_target = ""
-    if "text" in data_set[0]:
+    if (type == "catfact"):
         coll_target = "catfact"
-    elif "source" in data_set[0]:
+    elif (type == "meta"):
         coll_target = "meta"
+    elif (type == "intro"):
+        coll_target = "intro"
+    elif (type == "newsub"):
+        coll_target = "newsub"
+    elif (type == "unsub"):
+        coll_target = "unsub"
+    elif (type == "notrecog"):
+        coll_target = "notrecog"
     else:
         raise ValueError
     print("DEBUG: " + coll_target) 
@@ -54,6 +63,7 @@ def bulk_insert(auth_conn, auth_set, data_set):
         try:
             auth_conn[auth_set["db"]][coll_target].insert(doc)
         except errors.DuplicateKeyError:
+            # Should never happen on non-catfact and non-meta, as no explicit _id field
             print("Duplicate key on " + doc["_id"] + ", attempting update instead")
             auth_conn[auth_set["db"]][coll_target].update({"_id": doc["_id"]}, doc)
 

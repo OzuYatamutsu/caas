@@ -18,13 +18,13 @@ body {
 }
 
 .image-bg-fluid-height {
-	background: url('bg1.jpg') no-repeat center center scroll;
-    padding: 100px 0;
+    background: url('bg1.jpg') no-repeat center center scroll;
+    padding: 48px 0;
 }
 
 .image-bg-fixed-height {
-	background: url('bg2.jpg') no-repeat center center scroll;
-    height: 450px;
+    background: url('bg2.jpg') no-repeat center center scroll;
+    height: 332px;
 }
 
 .img-center {

@@ -1,8 +1,8 @@
 # Steakscorp CaaS
 **Cat-facts as a Service!** This project provides a RESTful API to query a MongoDB database for cat-facts scraped across the web.
 
-### API
-See `index.html` in the `django/caas_app/templates/` directory.
+### Demo + API
+See the hosted site [here](http://caas.steakscorp.org), or `index.html` in the `django/caas_app/templates/` directory.
 
 ### Dependencies
 **CaaS** is written in **Python 2**, **Django**, and assumes a **MongoDB** backend. It depends on the following:

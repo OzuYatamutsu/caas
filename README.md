@@ -24,7 +24,7 @@ Install them all at once:<br />
  * Hook up the `django/caas_app` Django application to the web server of your choice, or use `python manage.py startserver <ip>:<port>` to use the built-in Django web server to run the app.
 
 ### Scrapers
-Scrapers are used to scrape specific sources for cat-facts and output JSON files, ready to be inserted into the database. They are written in **Python 2** (but compatible with Python 3) and can be found in the `scrapers/` directory.
+Scrapers are used to scrape specific sources for cat-facts and output JSON files, ready to be inserted into the database. They are written in **Python 2** (but compatible with Python 3) and can be found in the `scrapers/` directory. To be compatible with the `data/db-insert.py` insertion script, output filenames should be prefixed by `<coll_name>_`, where `coll_name` is one of the target collections detailed below (without the `db.` prefix).
 
 ### MongoDB collection schema
 The database has six collections: **catfact**, **meta**, **intro**, **newsub**, **unsub**, and **notrecog**.

@@ -58,8 +58,7 @@ def bulk_insert(auth_conn, auth_set, data_set, type):
         coll_target = "notrecog"
     else:
         raise ValueError
-    print("DEBUG: " + coll_target) 
-    for doc in data_set:
+    doc in data_set:
         print("Inserting doc into " + coll_target + ": " + str(doc))
         try:
             auth_conn[auth_set["db"]][coll_target].insert(doc)

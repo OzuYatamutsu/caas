@@ -36,7 +36,8 @@ def main():
     
     output_json(output_catfact_fname, catfact_set)
     output_json(output_metadata_fname, metadata_set)
-   
+
+    driver.quit()   
     print(info_tag + "Processing complete!")
     print(info_tag + "Cat-facts output to: " + output_catfact_fname)
     print(info_tag + "Metadata output to: " + output_metadata_fname)

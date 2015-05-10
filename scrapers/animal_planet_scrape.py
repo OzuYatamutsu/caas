@@ -32,7 +32,7 @@ def main():
         if (cat_fact is not False):
             print(succ_tag + "Adding ID " + str(id) + " to set: " + cat_fact)
             catfact_set.append(catfact_process(cat_fact))
-            metadata_set.append(metadata_process(cat_fact, base_uri, id, source))
+            metadata_set.append(metadata_process(cat_fact, base_uri + id, source))
     
     output_json(output_catfact_fname, catfact_set)
     output_json(output_metadata_fname, metadata_set)

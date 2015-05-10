@@ -13,7 +13,7 @@ succ_tag = "<success> "
 driver = webdriver.PhantomJS()
 max_id = 49999
 output_catfact_fname = "catfact_animal-planet.json"
-output_metadata_fname = "metadata_animal-planet.json"
+output_metadata_fname = "meta_animal-planet.json"
 err_retry_count = 3
 
 def main():

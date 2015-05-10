@@ -44,10 +44,14 @@ def connect_db(auth_set):
 def bulk_insert(auth_conn, auth_set, data_set, type):
     # Don't call this with db_auth.json!
     coll_target = ""
+    no_id = True
+
     if (type == "catfact"):
         coll_target = "catfact"
+        no_id = False
     elif (type == "meta"):
         coll_target = "meta"
+        no_id = False
     elif (type == "intro"):
         coll_target = "intro"
     elif (type == "newsub"):
@@ -60,12 +64,23 @@ def bulk_insert(auth_conn, auth_set, data_set, type):
         raise ValueError
     for doc in data_set:
         print("Inserting doc into " + coll_target + ": " + str(doc))
-        try:
-            auth_conn[auth_set["db"]][coll_target].insert(doc)
-        except errors.DuplicateKeyError:
-            # Should never happen on non-catfact and non-meta, as no explicit _id field
-            print("Duplicate key on " + doc["_id"] + ", attempting update instead")
-            auth_conn[auth_set["db"]][coll_target].update({"_id": doc["_id"]}, doc)
+        if (no_id):
+            # intro, newsub, unsub, notrecog have no explicit id
+            # So let's skip if they're already there
+            try:
+                auth_conn[auth_set["db"]][coll_target].find({"text": doc["text"]})[0]
+                # No good, it exists - skip it!
+                print("Text already in database, skipping!")
+            except IndexError:
+                # We're good, it's unique! Insert it
+                auth_conn[auth_set["db"]][coll_target].insert(doc)
+        else:
+            try:
+                auth_conn[auth_set["db"]][coll_target].insert(doc)
+            except errors.DuplicateKeyError:
+                # Should never happen on non-catfact and non-meta, as no explicit _id field
+                print("Duplicate key on " + doc["_id"] + ", attempting update instead")
+                auth_conn[auth_set["db"]][coll_target].update({"_id": doc["_id"]}, doc)
 
 # Run on start
 main()

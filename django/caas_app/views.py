@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from mongoengine import queryset
 from caas_app.models import Catfact, Meta
 from random import randrange
 
@@ -20,27 +21,47 @@ def api(request):
     id = ""
     cat_fact = None
     meta = None
-    response_str = ""
+    response_json = {}
     
     # Unless id specified, get random fact
-    if (id not in request.GET):
-        id = str(Meta.objects[randrange(0, Meta.objects.count())].id)
+    if ("id" not in request.GET):        
+        if ("include" in request.GET):
+            include_params = [x.replace("+", " ").replace("%20", " ") for x in request.GET['include'].split(',')] 
+            filter_results = Meta.objects(source__in=include_params) 
+            id = str(filter_results[randrange(0, filter_results.count())].id)
+        elif ("exclude" in request.GET):
+            exclude_params = [x.replace("+", " ").replace("%20", " ") for x in request.GET['exclude'].split(',')]
+            filter_results = Meta.objects(source__nin=exclude_params)
+            id = str(filter_results[randrange(0, filter_results.count())].id)
+        else:
+            # No filters
+            id = str(Meta.objects[randrange(0, Meta.objects.count())].id)
     else:
         id = request.GET['id']
         try:
             # Check if ID exists
             Meta.objects().get(_id=request.GET['id'])
-        except Exception: # TODO: specific type
+        except queryset.DoesNotExist: 
             return HttpResponse("Cat-fact ID " + id + " was not found.")
     
     # Lookup cat-fact ID in database
-    cat_fact = Catfact.objects().get(_id=rand_id)
-    meta = Meta.objects().get(_id=rand_id)        
+    cat_fact = Catfact.objects().get(_id=id)
+    meta = Meta.objects().get(_id=id)        
     
     # Now parse other arguments here
-    # TODO: args
+    if ("intro" in request.GET):
+        pass
+    if ("newsub" in request.GET):
+        pass
+    if ("unsub" in request.GET):
+        pass
+    if ("notrecog" in request.GET):
+        pass
 
     # Now construct JSON response here
-    # TODO: response from str
-
-    return HttpResponse(response_str)
+    response_json['_id'] = id
+    response_json['text'] = cat_fact.text
+    response_json['source'] = meta.source
+    response_json['url'] = meta.url
+    
+    return JsonResponse(response_json)

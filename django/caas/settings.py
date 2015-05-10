@@ -110,7 +110,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '9*4-lqv6w3m@-b6v62qbx$+cs)t@h(rt@7jmllr5hst9uk=xb6'
+SECRET_KEY = ''
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (

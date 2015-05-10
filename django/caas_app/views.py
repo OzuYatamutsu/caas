@@ -35,7 +35,7 @@ def api(request):
             exclude_params = [x.replace("+", " ").replace("%20", " ") for x in request.GET['exclude'].split(',')]
             filter_results = Meta.objects(source__nin=exclude_params)
             if (filter_results.count() == 0):
-                return HttpResponse("No results from sources other than " + str(include_params) + "!")
+                return HttpResponse("No results from sources other than " + str(exclude_params) + "!")
 
             id = str(filter_results[randrange(0, filter_results.count())].id)
         else:

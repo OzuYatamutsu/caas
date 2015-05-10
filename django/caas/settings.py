@@ -7,6 +7,7 @@ import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+AUTHFILE_LOCATION = "INSERT PATH HERE"
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -17,7 +18,7 @@ MANAGERS = ADMINS
 # Read from auth file
 db_auth = {}
 
-with open(os.path.abspath(os.path.join(argv[0], os.pardir, "db_auth.json")), "r") as f:
+with open(os.path.join(AUTHFILE_LOCATION, "db_auth.json"), "r") as f:
     db_auth = loads(f.read())
 
 DATABASES = {

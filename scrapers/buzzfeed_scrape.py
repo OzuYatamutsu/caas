@@ -1,12 +1,12 @@
 from selenium import webdriver
 from scraper_utils import *
 
-source = "mental_floss"
-uri = "http://mentalfloss.com/uk/science/25796/20-fun-facts-about-cats"
+source = "Buzzfeed"
+uri = "http://www.buzzfeed.com/chelseamarshall/meows"
 
 driver = webdriver.PhantomJS()
-output_catfact_fname = "catfact_mentalfloss.json"
-output_metadata_fname = "meta_mentalfloss.json"
+output_catfact_fname = "catfact_buzzfeed.json"
+output_metadata_fname = "meta_buzzfeed.json"
 err_retry_count = 3
 
 def main():
@@ -31,11 +31,16 @@ def main():
     print(info_tag + "Metadata output to: " + output_metadata_fname)
 
 def scrape(uri):
+    # NOTE: For some reason, phantomjs <= 1.9.0 may hang here sometimes
     global driver
 
     driver.get(uri)
-    results = driver.find_elements_by_class_name("field-name-body")[0]
-    return [pronoun_replace(x.text[3:]) for x in results.find_elements_by_tag_name("h4")]
+    results = driver.find_elements_by_id("buzz_sub_buzz")[0]
+    end_result = []
+    for item in results.find_elements_by_tag_name("p"):
+        if (len(item.text) > 0 and item.text[0].isdigit()):
+            end_result.append(pronoun_replace(item.text[3:]))
+    return end_result
 
 def pronoun_replace(text):
     text = text.replace("They're", "Cats are")
@@ -50,7 +55,7 @@ def pronoun_replace(text):
     text = text if text[0] != " " else text[1:]
     
     text = text.capitalize()
-    return text 
+    return text
 
 # Run on call
 main()

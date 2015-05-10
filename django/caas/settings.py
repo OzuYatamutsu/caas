@@ -17,7 +17,7 @@ MANAGERS = ADMINS
 # Read from auth file
 db_auth = {}
 
-with open(os.path.abspath(os.path.join(argv[0], os.pardir, "db-auth.json")), "r") as f:
+with open(os.path.abspath(os.path.join(argv[0], os.pardir, "db_auth.json")), "r") as f:
     db_auth = loads(f.read())
 
 DATABASES = {

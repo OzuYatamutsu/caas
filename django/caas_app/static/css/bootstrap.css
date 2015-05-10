@@ -1090,7 +1090,7 @@ body {
   font-size: 14px;
   line-height: 1.42857143;
   color: #333;
-  background-color: #fff;
+  background-color: #f6f7fa;
 }
 input,
 button,
@@ -2287,7 +2287,7 @@ th {
   border-top: 2px solid #ddd;
 }
 .table .table {
-  background-color: #fff;
+  background-color: #f6f7fa;
 }
 .table-condensed > thead > tr > th,
 .table-condensed > tbody > tr > th,

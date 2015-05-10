@@ -45,25 +45,25 @@ This collection contains the metadata of the cat-fact.
 `url` The specific URL where the cat-fact text was scraped.
 
 #### `db.intro`
-This collection contains intro text (see [API|#API]) to be inserted before the response text if `intro=yes` was specified in the API query.
+This collection contains intro text (see [API](#API)) to be inserted before the response text if `intro=yes` was specified in the API query.
 
 ##### Fields
 `text` The intro text to be inserted before the response text. The actual text included in the response will be chosen randomly from this collection.
 
 #### `db.newsub`
-This collection contains new subscription text (see [API|#API]) to be inserted before the response text if `newsub=yes` was specified in the API query.
+This collection contains new subscription text (see [API](#API)) to be inserted before the response text if `newsub=yes` was specified in the API query.
 
 ##### Fields
 `text` The new subscription text to be inserted before the response text. The actual text included in the response will be chosen randomly from this collection.
 
 #### `db.unsub`
-This collection contains unsubscription text (see [API|#API]) to be inserted after the response text if `unsub=yes` was specified in the API query.
+This collection contains unsubscription text (see [API](#API)) to be inserted after the response text if `unsub=yes` was specified in the API query.
 
 ##### Fields
 `text` The unsubscription text to be inserted before the response text. The actual text included in the response will be chosen randomly from this collection.
 
 #### `db.intro`
-This collection contains "command not recognized" error messages (see [API|#API]) to be inserted before the response text if `notrecog=yes` was specified in the API query.
+This collection contains "command not recognized" error messages (see [API](#API)) to be inserted before the response text if `notrecog=yes` was specified in the API query.
 
 ##### Fields
 `text` The "command not recognized" text to be inserted before the response text. The actual text included in the response will be chosen randomly from this collection.

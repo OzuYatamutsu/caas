@@ -42,6 +42,7 @@ def connect_db(auth_set):
     return conn
 
 def bulk_insert(auth_conn, auth_set, data_set, type):
+    # Don't call this with db_auth.json!
     coll_target = ""
     if (type == "catfact"):
         coll_target = "catfact"

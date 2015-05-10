@@ -19,8 +19,8 @@ Install them all at once:<br />
 
 ### Setup
  * Install MongoDB (if not done already) and add a new `caas` database from the MongoDB shell: `use caas`
- * Copy `django/db-auth.template.json` to `django/db-auth.json`, and edit the `username`, `password`, and any other required fields to match your database settings. Do the same in the `data/` directory.
- * Run `data/db-insert.py` against `data/db-auth.json` and all `.json` files in the `data/` directory to populate your database.
+ * Copy `django/db_auth.template.json` to `django/db_auth.json`, and edit the `username`, `password`, and any other required fields to match your database settings. Do the same in the `data/` directory.
+ * Run `data/db-insert.py` against `data/db_auth.json` and all `.json` files in the `data/` directory to populate your database.
  * Hook up the `django/caas_app` Django application to the web server of your choice, or use `python manage.py startserver <ip>:<port>` to use the built-in Django web server to run the app.
 
 ### Scrapers

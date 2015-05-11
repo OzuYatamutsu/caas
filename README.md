@@ -63,7 +63,7 @@ This collection contains unsubscription text (see [API](#api)) to be inserted af
 ##### Fields
 `text` The unsubscription text to be inserted before the response text. The actual text included in the response will be chosen randomly from this collection.
 
-#### `db.intro`
+#### `db.notrecog`
 This collection contains "command not recognized" error messages (see [API](#api)) to be inserted before the response text if `notrecog=yes` was specified in the API query.
 
 ##### Fields

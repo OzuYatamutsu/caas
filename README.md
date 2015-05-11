@@ -11,11 +11,11 @@ See the hosted site [here](http://caas.steakscorp.org), or `index.html` in the `
  * `mongoengine` version **0.9.0**.
 
 ##### Scrapers
- * `phantomjs`
+ * `phantomjs` (A simple `apt-get install phantomjs` on Ubuntu, otherwise check for your distro)
  * `selenium`
 
 Install them all at once:<br />
-`pip install pymongo==2.8 mongoengine==0.9.0 django phantomjs selenium`
+`pip install pymongo==2.8 mongoengine==0.9.0 django selenium`
 
 ### Setup
  * Install MongoDB (if not done already) and add a new `caas` database from the MongoDB shell: `use caas`

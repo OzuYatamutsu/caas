@@ -11,11 +11,11 @@ See the hosted site [here](http://caas.steakscorp.org), or `index.html` in the `
  * `mongoengine` version **0.9.0**.
 
 ##### Scrapers
- * `phantomjs`
+ * `phantomjs` (A simple `apt-get install phantomjs` on Ubuntu, otherwise check for your distro)
  * `selenium`
 
 Install them all at once:<br />
-`pip install pymongo==2.8 mongoengine==0.9.0 django phantomjs selenium`
+`pip install pymongo==2.8 mongoengine==0.9.0 django selenium`
 
 ### Setup
  * Install MongoDB (if not done already) and add a new `caas` database from the MongoDB shell: `use caas`
@@ -46,25 +46,25 @@ This collection contains the metadata of the cat-fact.
 `url` The specific URL where the cat-fact text was scraped.
 
 #### `db.intro`
-This collection contains intro text (see [API](#api)) to be inserted before the response text if `intro=yes` was specified in the API query.
+This collection contains intro text (see [API](#demo--api)) to be inserted before the response text if `intro=yes` was specified in the API query.
 
 ##### Fields
 `text` The intro text to be inserted before the response text. The actual text included in the response will be chosen randomly from this collection.
 
 #### `db.newsub`
-This collection contains new subscription text (see [API](#api)) to be inserted before the response text if `newsub=yes` was specified in the API query.
+This collection contains new subscription text (see [API](#demo--api)) to be inserted before the response text if `newsub=yes` was specified in the API query.
 
 ##### Fields
 `text` The new subscription text to be inserted before the response text. The actual text included in the response will be chosen randomly from this collection.
 
 #### `db.unsub`
-This collection contains unsubscription text (see [API](#api)) to be inserted after the response text if `unsub=yes` was specified in the API query.
+This collection contains unsubscription text (see [API](#demo--api)) to be inserted after the response text if `unsub=yes` was specified in the API query.
 
 ##### Fields
 `text` The unsubscription text to be inserted before the response text. The actual text included in the response will be chosen randomly from this collection.
 
-#### `db.intro`
-This collection contains "command not recognized" error messages (see [API](#api)) to be inserted before the response text if `notrecog=yes` was specified in the API query.
+#### `db.notrecog`
+This collection contains "command not recognized" error messages (see [API](#demo--api)) to be inserted before the response text if `notrecog=yes` was specified in the API query.
 
 ##### Fields
 `text` The "command not recognized" text to be inserted before the response text. The actual text included in the response will be chosen randomly from this collection.
